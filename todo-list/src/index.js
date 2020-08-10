@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import "bootstrap/dist/css/bootstrap.css"
-import $ from "jquery/dist/jquery"
 import App from './ui/containers/App';
 
 
