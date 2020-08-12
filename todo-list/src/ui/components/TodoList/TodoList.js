@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import TodoItem from "../TodoItem/TodoItem";
 
+
 export default class TodoList extends Component {
     render() {
         const {items , clearList, handleDelete, handleEdit , handleCheck, handlePriority} = this.props;
@@ -20,6 +21,7 @@ export default class TodoList extends Component {
             />
         });
         return (
+
             <ul className={"list-group my-5"}>
                 {
                     finalTasks

@@ -4,6 +4,7 @@ import TodoInput from "../components/TodoInput/TodoInput";
 import TodoList from "../components/TodoList/TodoList";
 import "bootstrap/dist/css/bootstrap.min.css"
 import {v4 as uuid} from 'uuid';
+import CircularIndeterminate from "../components/Circular/Circular";
 
 export default class App extends Component {
     state = {
@@ -11,7 +12,16 @@ export default class App extends Component {
         id: uuid(),
         item: '',
         editItem: false,
-        complete: false
+        complete: false,
+        show: true
+    }
+    componentDidMount() {
+        this.timer = setTimeout(this.toggle,2000)
+    }
+    toggle=()=>{
+        this.setState({
+            show :false
+        })
     }
     handleChange = (e) => {
         this.setState({
@@ -36,56 +46,56 @@ export default class App extends Component {
             priority: false,
         })
     }
-    clearList = () =>{
-            this.setState({
-                items:[]
-            })
+    clearList = () => {
+        this.setState({
+            items: []
+        })
     };
-    handleDelete = id =>{
-            const filteredItems  = this.state.items.filter(item=> item.id !== id);
-            this.setState({
-                items:filteredItems
-            });
+    handleDelete = id => {
+        const filteredItems = this.state.items.filter(item => item.id !== id);
+        this.setState({
+            items: filteredItems
+        });
     };
 
-    handleEdit = id =>{
-        const filteredItems  = this.state.items.filter(item=> item.id !== id);
-        const selectedItem = this.state.items.find( item => item.id === id)
+    handleEdit = id => {
+        const filteredItems = this.state.items.filter(item => item.id !== id);
+        const selectedItem = this.state.items.find(item => item.id === id)
         this.setState({
-            items:filteredItems,
+            items: filteredItems,
             item: selectedItem.title,
             editItem: true,
-            id:id
+            id: id
         });
 
     }
-    handleCheck = id =>{
-        const{items} = this.state
-        const index = this.state.items.map( item => item.id).indexOf(id);
-        if (items[index].complete === true){
-            this.setState( state => {
+
+    handleCheck = id => {
+        const {items} = this.state
+        const index = this.state.items.map(item => item.id).indexOf(id);
+        if (items[index].complete === true) {
+            this.setState(state => {
                 let {items} = this.state;
                 items[index].complete = false;
                 return items
             });
-        }
-        else this.setState( state => {
+        } else this.setState(state => {
             let {items} = this.state;
             items[index].complete = true;
             return items
         });
     }
-    handlePriority = id =>{
-        const{items} = this.state
-        const index = this.state.items.map( item => item.id).indexOf(id);
-        if (items[index].priority === true){
-            this.setState( state => {
+
+    handlePriority = id => {
+        const {items} = this.state
+        const index = this.state.items.map(item => item.id).indexOf(id);
+        if (items[index].priority === true) {
+            this.setState(state => {
                 let {items} = this.state;
                 items[index].priority = false;
                 return items
             });
-        }
-        else this.setState( state => {
+        } else this.setState(state => {
             let {items} = this.state;
             items[index].priority = true;
             return items
@@ -93,9 +103,11 @@ export default class App extends Component {
     }
 
     render() {
-        const {editItem, item, items } =this.state;
-
-        return <>
+        const {editItem, item, items,show} = this.state;
+        console.log(show)
+        return show
+        ?<CircularIndeterminate />
+        :<>
             <Header/>
             <TodoInput
                 item={item}
