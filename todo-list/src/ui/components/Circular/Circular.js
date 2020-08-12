@@ -17,7 +17,7 @@ export default function CircularIndeterminate() {
     return (
             <div className={'circular bg-dark'}>
                 <div className={`${classes.root} align-items-center justify-content-center `}>
-                    <CircularProgress color="secondary" />
+                    <CircularProgress color="secondary" size={50}/>
                     <h2>Loading...</h2>
                 </div>
             </div>

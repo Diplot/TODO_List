@@ -16,7 +16,7 @@ export default class App extends Component {
         show: true
     }
     componentDidMount() {
-        this.timer = setTimeout(this.toggle,2000)
+         setTimeout(this.toggle,2000)
     }
     toggle=()=>{
         this.setState({
